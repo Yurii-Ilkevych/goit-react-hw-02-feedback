@@ -1,33 +1,29 @@
-import {
-  WrapperButton,
-  BtnGood,
-  BtnNeutral,
-  BtnBad,
-} from './FeedbackOptions.styled.js';
+import { WrapperButton, Btn } from './FeedbackOptions.styled.js';
 import PropTypes from 'prop-types';
-const FeedbackOption = ({
-  onLeaveFeedbackGood,
-  onLeaveFeedbackNeutral,
-  onLeaveFeedbackBad,
-}) => {
+
+const FeedbackOption = ({ onLeaveFeedback, options }) => {
   return (
     <WrapperButton>
-      <BtnGood type="button" onClick={onLeaveFeedbackGood}>
-        Good
-      </BtnGood>
-      <BtnNeutral type="button" onClick={onLeaveFeedbackNeutral}>
-        Neutral
-      </BtnNeutral>
-      <BtnBad type="button" onClick={onLeaveFeedbackBad}>
-        Bad
-      </BtnBad>
+      {options.map(elBtn => {
+        return (
+          <Btn
+            evtType={elBtn}
+            key={elBtn}
+            onClick={() => {
+              onLeaveFeedback(elBtn);
+            }}
+            type="button"
+          >
+            {elBtn}
+          </Btn>
+        );
+      })}
     </WrapperButton>
   );
 };
 export default FeedbackOption;
 
 FeedbackOption.propTypes = {
-  onLeaveFeedbackGood: PropTypes.func.isRequired,
-  onLeaveFeedbackNeutral: PropTypes.func.isRequired,
-  onLeaveFeedbackBad: PropTypes.func.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+  Btn: PropTypes.arrayOf(PropTypes.string.isRequired),
 };

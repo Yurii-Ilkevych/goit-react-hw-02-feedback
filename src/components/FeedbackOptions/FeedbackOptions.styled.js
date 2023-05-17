@@ -6,52 +6,54 @@ const WrapperButton = styled.div`
   display: flex;
   column-gap: 10px;
 `;
-const BtnGood = styled.button`
-  background-color: rgb(55, 173, 55);
+
+const Btn = styled.button`
+  background-color: ${({ evtType, theme }) => {
+    switch (evtType) {
+      case 'good':
+        return theme.colorPallete.green;
+      case 'neutral':
+        return theme.colorPallete.gray;
+      case 'bad':
+        return theme.colorPallete.red;
+      default:
+        return theme.colorPallete.gray;
+    }
+  }};
   cursor: pointer;
   border: 1px solid rgb(74, 72, 71);
   border-radius: 2px;
   box-shadow: 0 1px #666;
   &:hover {
-    background-color: rgb(26, 133, 26);
+    background-color: ${({ evtType, theme }) => {
+      switch (evtType) {
+        case 'good':
+          return theme.colorPallete.greenHover;
+        case 'neutral':
+          return theme.colorPallete.grayHover;
+        case 'bad':
+          return theme.colorPallete.redHover;
+        default:
+          return theme.colorPallete.gray;
+      }
+    }};
     transform-style: 1px;
   }
   &:active {
-    background-color: rgb(55, 173, 55);
+    background-color: ${({ evtType, theme }) => {
+      switch (evtType) {
+        case 'good':
+          return theme.colorPallete.green;
+        case 'neutral':
+          return theme.colorPallete.gray;
+        case 'bad':
+          return theme.colorPallete.red;
+        default:
+          return theme.colorPallete.gray;
+      }
+    }};
     box-shadow: none;
     transform: translateY(1px);
   }
 `;
-const BtnNeutral = styled.button`
-  background-color: rgb(240, 246, 240);
-  cursor: pointer;
-  border: 1px solid rgb(74, 72, 71);
-  border-radius: 2px;
-  box-shadow: 0 1px #666;
-  &:hover {
-    background-color: rgb(152, 157, 152);
-    transform-style: 1px;
-  }
-  &:active {
-    background-color: rgb(240, 246, 240);
-    box-shadow: none;
-    transform: translateY(1px);
-  }
-`;
-const BtnBad = styled.button`
-  background-color: rgb(244, 41, 41);
-  cursor: pointer;
-  border: 1px solid rgb(74, 72, 71);
-  border-radius: 2px;
-  box-shadow: 0 1px #666;
-  &:hover {
-    background-color: rgb(189, 15, 15);
-    transform-style: 1px;
-  }
-  &:active {
-    background-color: rgb(244, 41, 41);
-    box-shadow: none;
-    transform: translateY(1px);
-  }
-`;
-export { WrapperButton, BtnGood, BtnNeutral, BtnBad };
+export { WrapperButton, Btn };

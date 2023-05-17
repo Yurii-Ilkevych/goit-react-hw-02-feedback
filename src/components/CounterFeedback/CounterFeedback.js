@@ -26,70 +26,54 @@ class CounterFeedback extends Component {
     neutral: this.props.neutral,
     bad: this.props.bad,
     total: this.props.total,
-    positiveFeedback: this.props.positivePercentage,
+    positivePercentage: this.props.positivePercentage,
   };
 
-  hundelCountGood = () => {
+  houndleCount = optionState => {
+    console.log(optionState);
     this.setState(praveState => {
-      return { good: praveState.good + 1 };
-    });
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
-  };
-  hundelCountNeutral = () => {
-    this.setState(praveState => {
-      return { neutral: praveState.neutral + 1 };
-    });
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
-  };
-  hundelCountBad = () => {
-    this.setState(praveState => {
-      return { bad: praveState.bad + 1 };
+      return { [optionState]: praveState[optionState] + 1 };
     });
     this.countTotalFeedback();
     this.countPositiveFeedbackPercentage();
   };
 
   countTotalFeedback = () => {
-    this.setState(praveState => {
+    this.setState(({ total, good, neutral, bad }) => {
       return {
-        total: (praveState.total =
-          praveState.good + praveState.neutral + praveState.bad),
+        total: (total = good + neutral + bad),
       };
     });
   };
   countPositiveFeedbackPercentage = () => {
-    this.setState(praveState => {
+    this.setState(({ positivePercentage, good, neutral, bad }) => {
       return {
-        positiveFeedback: Number(
-          (praveState.positiveFeedback = (
-            (100 / (praveState.good + praveState.neutral + praveState.bad)) *
-            praveState.good
-          ).toFixed(2))
+        positivePercentage: Number(
+          (positivePercentage = ((100 / (good + neutral + bad)) * good).toFixed(
+            2
+          ))
         ),
       };
     });
   };
 
   render() {
-    const { good, neutral, bad, total, positiveFeedback } = this.state;
+    const { good, neutral, bad, total, positivePercentage } = this.state;
     return (
       <>
-        <Section tittle="Please leave feedback"> 
+        <Section tittle="Please leave feedback">
           <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
             total={total}
-            positivePercentage={positiveFeedback}
+            positivePercentage={positivePercentage}
           ></Statistics>
         </Section>
         <Section tittle="Statistics">
           <FeedbackOption
-            onLeaveFeedbackGood={this.hundelCountGood}
-            onLeaveFeedbackNeutral={this.hundelCountNeutral}
-            onLeaveFeedbackBad={this.hundelCountBad}
+            onLeaveFeedback={this.houndleCount}
+            options={['good', 'neutral', 'bad']}
           ></FeedbackOption>
         </Section>
       </>

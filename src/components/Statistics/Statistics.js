@@ -4,7 +4,7 @@ import {
   NeutralStat,
   BadStat,
   TotalStat,
-  PositiveFeedbackStat,
+  PositivePercentage,
 } from './Statistics.styled';
 import Notifications from 'components/Notification';
 import PropTypes from 'prop-types';
@@ -18,9 +18,9 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
           <NeutralStat>Neutral: {neutral}</NeutralStat>
           <BadStat>Bad: {bad}</BadStat>
           <TotalStat>Total: {total}</TotalStat>
-          <PositiveFeedbackStat>
+          <PositivePercentage>
             Positive feedback: {positivePercentage}%
-          </PositiveFeedbackStat>
+          </PositivePercentage>
         </WrapperStatistics>
       ) : (
         <Notifications message="There is no feedback" />

@@ -19,7 +19,7 @@ const BadStat = styled.p`
 const TotalStat = styled.p`
   color: rgb(98, 63, 17);
 `;
-const PositiveFeedbackStat = styled.p`
+const PositivePercentage = styled.p`
   color: rgb(3, 94, 3);
 `;
 export {
@@ -28,5 +28,5 @@ export {
   NeutralStat,
   BadStat,
   TotalStat,
-  PositiveFeedbackStat,
+  PositivePercentage,
 };
